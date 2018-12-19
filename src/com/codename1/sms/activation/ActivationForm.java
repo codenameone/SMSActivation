@@ -263,7 +263,9 @@ public class ActivationForm {
             if(Dialog.show("Intercept SMS", "We will send you an SMS verification code in order to intercept it automatically you will need to approve the next permission prompt", "OK", "No Thanks")) {
                 SMSInterceptor.grabNextSMS(s -> {
                     if(s.indexOf(verificationValue) > -1) {
-                        backForm.showBack();
+                        if(backForm != null) {
+                            backForm.showBack();
+                        }
                         phoneNumber.onSucess("+" + countryCode.getText() + phone.getText());
                     }
                 });
@@ -301,11 +303,13 @@ public class ActivationForm {
         this.phoneNumber = phoneNumber;
         this.twilio = twilio;
         Form f = getCurrentForm();
-        Transition currentTrans = f.getTransitionOutAnimator();
-        f.setTransitionOutAnimator(CommonTransitions.createCover(CommonTransitions.SLIDE_VERTICAL, false, 400));
-        activationForm.addShowListener(e -> f.setTransitionOutAnimator(currentTrans));
-        activationForm.getToolbar().setBackCommand("", e -> f.showBack());
-        
+        if(f != null) {
+            Transition currentTrans = f.getTransitionOutAnimator();
+            f.setTransitionOutAnimator(CommonTransitions.createCover(CommonTransitions.SLIDE_VERTICAL, false, 400));
+            activationForm.addShowListener(e -> f.setTransitionOutAnimator(currentTrans));
+            activationForm.getToolbar().setBackCommand("", e -> f.showBack());
+        }
+
         phone.setDoneListener(e -> showNumberForm(f));
         
         if(includeFab) {
