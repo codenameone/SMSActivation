@@ -281,10 +281,12 @@ public class ActivationForm {
                 if(code.getText().length() > codeDigits + 2) {
                     return;
                 }
-                backForm.showBack();
-                if(phoneNumber != null) {
-                    phoneNumber.onSucess("+" + countryCode.getText() + phone.getText());
-                    phoneNumber = null;
+                if(backForm != null) {
+                    backForm.showBack();
+                    if(phoneNumber != null) {
+                        phoneNumber.onSucess("+" + countryCode.getText() + phone.getText());
+                        phoneNumber = null;
+                    }
                 }
             }
         });
