@@ -283,10 +283,10 @@ public class ActivationForm {
                 }
                 if(backForm != null) {
                     backForm.showBack();
-                    if(phoneNumber != null) {
-                        phoneNumber.onSucess("+" + countryCode.getText() + phone.getText());
-                        phoneNumber = null;
-                    }
+                }
+                if(phoneNumber != null) {
+                    phoneNumber.onSucess("+" + countryCode.getText() + phone.getText());
+                    phoneNumber = null;
                 }
             }
         });

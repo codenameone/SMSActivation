@@ -36,7 +36,7 @@ public class SMSInterceptor {
     private static NativeSMSInterceptor get() {
         if (nativeImpl == null) {
             nativeImpl = NativeLookup.create(NativeSMSInterceptor.class);
-            if (!nativeImpl.isSupported()) {
+            if (nativeImpl == null || !nativeImpl.isSupported()) {
                 nativeImpl = null;
             }
         }
